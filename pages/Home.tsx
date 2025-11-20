@@ -1,8 +1,9 @@
 
 import React from 'react';
-import VeoHero from '../components/VeoHero';
+import Hero from '../components/Hero';
 import { Page } from '../types';
 import { PROJECTS } from '../constants';
+import calloutImage from '../assets/aaron-huber-G7sE2S4Lab4-unsplash.jpg';
 
 interface HomeProps {
   onNavigate: (page: Page) => void;
@@ -14,7 +15,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="bg-[#f0ece2] min-h-screen">
-      <VeoHero onNavigate={onNavigate} />
+      <Hero onNavigate={onNavigate} />
 
       {/* Philosophy Section */}
       <section className="py-24 md:py-40 px-6 md:px-12 max-w-5xl mx-auto text-center">
@@ -64,7 +65,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* Large visual break */}
       <section className="h-[70vh] w-full relative overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1615529328331-f8917597711f?q=80&w=2670&auto=format&fit=crop" 
+          src={calloutImage}
           className="w-full h-full object-cover fixed-background"
           alt="Mountain Atmosphere" 
         />

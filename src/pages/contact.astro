@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const AMBIENT_IMAGES = [
+  "/assets/aaron-huber-G7sE2S4Lab4-unsplash.jpg",
+  "/assets/inside-weather-Uxqlfigh6oE-unsplash.jpg",
+  "/assets/jason-wang-5MG8cQbw-T8-unsplash.jpg"
+];
+---
+
+<Layout title="Contact - Spatial Interior Design">
+  <div class="flex flex-col min-h-screen">
+    <Navbar />
+
+    <main class="flex-grow pt-32 relative bg-soft-cream overflow-hidden">
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        {AMBIENT_IMAGES.map((image, index) => (
+          <div
+            class={`ambient-image absolute inset-0 transition-opacity duration-[2000ms] ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+            data-index={index}
+          >
+            <div class="w-full h-full animate-contact-ken-burns will-change-transform">
+              <img
+                src={image}
+                alt="Ambient interior"
+                class="w-full h-full object-cover opacity-25"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </div>
+          </div>
+        ))}
+        <div class="absolute inset-0 bg-soft-cream/85"></div>
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 pb-20">
+        <div class="text-center mb-16">
+          <h1 class="font-serif text-5xl md:text-6xl text-earthy-green mb-4">Inquiries</h1>
+          <p class="font-light text-earthy-green text-lg">
+            Discuss your lake or mountain property project.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 md:p-12 shadow-xl shadow-cool-grey/20">
+          <form class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="flex flex-col">
+                <label class="text-xs tracking-widest uppercase text-cool-grey mb-2">Name</label>
+                <input
+                  type="text"
+                  class="border-b border-cool-grey py-2 focus:outline-none focus:border-earthy-green bg-transparent transition-colors"
+                />
+              </div>
+              <div class="flex flex-col">
+                <label class="text-xs tracking-widest uppercase text-cool-grey mb-2">Email</label>
+                <input
+                  type="email"
+                  class="border-b border-cool-grey py-2 focus:outline-none focus:border-earthy-green bg-transparent transition-colors"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-col">
+              <label class="text-xs tracking-widest uppercase text-cool-grey mb-2">Project Type</label>
+              <select class="border-b border-cool-grey py-2 focus:outline-none focus:border-earthy-green bg-transparent transition-colors text-earthy-green appearance-none cursor-pointer hover:border-golden-tan">
+                <option value="" disabled selected>Select project type</option>
+                <option value="new-build">New Custom Build</option>
+                <option value="renovation">Full Renovation</option>
+                <option value="furnishing">Interior Furnishing</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col">
+              <label class="text-xs tracking-widest uppercase text-cool-grey mb-2">Message</label>
+              <textarea
+                rows="4"
+                class="border-b border-cool-grey py-2 focus:outline-none focus:border-earthy-green bg-transparent transition-colors resize-none"
+              ></textarea>
+            </div>
+
+            <div class="pt-4 text-center md:text-left">
+              <button class="px-10 py-4 bg-earthy-green text-soft-cream hover:bg-[#5e634d] transition-colors uppercase tracking-widest text-sm w-full md:w-auto">
+                Send Inquiry
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left text-earthy-green">
+          <div>
+            <h3 class="font-serif text-xl mb-2">Email</h3>
+            <p class="font-light text-sm">hello@spatialdesign.com</p>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl mb-2">Phone</h3>
+            <p class="font-light text-sm">+1 (864) 555-0199</p>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl mb-2">Studio</h3>
+            <p class="font-light text-sm">By Appointment Only<br />Greenville, SC</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  @keyframes contact-ken-burns {
+    0% { transform: scale3d(1, 1, 1); }
+    100% { transform: scale3d(1.05, 1.05, 1); }
+  }
+  .animate-contact-ken-burns {
+    animation: contact-ken-burns 18s ease-in-out infinite alternate;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+</style>
+
+<script>
+  const images = document.querySelectorAll('.ambient-image');
+  let activeIndex = 0;
+
+  function cycleImages() {
+    // Hide current image
+    images[activeIndex].classList.remove('opacity-100');
+    images[activeIndex].classList.add('opacity-0');
+
+    // Move to next image
+    activeIndex = (activeIndex + 1) % images.length;
+
+    // Show next image
+    images[activeIndex].classList.remove('opacity-0');
+    images[activeIndex].classList.add('opacity-100');
+  }
+
+  // Start cycling every 12 seconds
+  setInterval(cycleImages, 12000);
+</script>

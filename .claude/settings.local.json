@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(if [ -d assets ])",
+      "Bash(then mv assets public/)",
+      "Bash(fi)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

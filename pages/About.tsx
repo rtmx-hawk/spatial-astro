@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { TEAM } from '../constants';
+import studioImage from '../assets/jason-briscoe-UV81E0oXXWQ-unsplash.jpg';
 
 const About: React.FC = () => {
   return (
@@ -29,7 +30,7 @@ const About: React.FC = () => {
           <div className="relative">
              <div className="absolute -top-6 -left-6 w-full h-full border border-[#b99668] z-0"></div>
              <img 
-               src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2600&auto=format&fit=crop" 
+               src={studioImage} 
                alt="Studio Details" 
                className="w-full relative z-10 grayscale hover:grayscale-0 transition-all duration-1000"
              />

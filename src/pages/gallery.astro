@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { PROJECTS } from '../data/constants';
+---
+
+<Layout title="Portfolio - Spatial Interior Design">
+  <div class="flex flex-col min-h-screen bg-soft-cream">
+    <Navbar />
+
+    <main class="flex-grow pt-32 pb-20 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <header class="mb-20 text-center">
+          <h1 class="font-serif text-5xl md:text-7xl text-earthy-green mb-6">Portfolio</h1>
+          <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+            <button class="filter-btn text-xs tracking-[0.2em] uppercase transition-all duration-300 text-golden-tan border-b border-golden-tan pb-1" data-filter="All">
+              All
+            </button>
+            <button class="filter-btn text-xs tracking-[0.2em] uppercase transition-all duration-300 text-cool-grey hover:text-earthy-green" data-filter="Lake">
+              Lake
+            </button>
+            <button class="filter-btn text-xs tracking-[0.2em] uppercase transition-all duration-300 text-cool-grey hover:text-earthy-green" data-filter="Mountain">
+              Mountain
+            </button>
+            <button class="filter-btn text-xs tracking-[0.2em] uppercase transition-all duration-300 text-cool-grey hover:text-earthy-green" data-filter="Estate">
+              Estate
+            </button>
+          </div>
+        </header>
+
+        <!-- Masonry-style Grid -->
+        <div id="gallery-grid" class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+          {PROJECTS.map((project) => (
+            <div
+              class="project-item break-inside-avoid group cursor-pointer"
+              data-category={project.category}
+            >
+              <div class="relative overflow-hidden bg-gray-200">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-auto transition-transform duration-700 group-hover:scale-105 will-change-transform"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="absolute inset-0 bg-earthy-green/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-center items-center text-soft-cream p-6 text-center will-change-opacity">
+                  <h3 class="font-serif text-2xl italic mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 will-change-transform">{project.title}</h3>
+                  <p class="text-xs tracking-widest uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75 will-change-transform">{project.location}</p>
+                  <p class="mt-4 text-sm font-light opacity-80 max-w-xs translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100 will-change-transform">{project.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div
+        id="lightbox"
+        class="hidden fixed inset-0 bg-black/95 z-[100] items-center justify-center p-4 cursor-zoom-out"
+      >
+        <img
+          id="lightbox-image"
+          src=""
+          alt="Full view"
+          class="max-w-full max-h-[90vh] shadow-2xl"
+        />
+        <button
+          id="lightbox-close"
+          class="absolute top-6 right-6 text-white text-sm tracking-widest uppercase opacity-70 hover:opacity-100"
+        >
+          Close
+        </button>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  // Filter functionality
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Update active state
+      filterButtons.forEach(btn => {
+        btn.classList.remove('text-golden-tan', 'border-b', 'border-golden-tan', 'pb-1');
+        btn.classList.add('text-cool-grey');
+      });
+      button.classList.remove('text-cool-grey');
+      button.classList.add('text-golden-tan', 'border-b', 'border-golden-tan', 'pb-1');
+
+      // Filter projects
+      projectItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filter === 'All' || category === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Lightbox functionality
+  projectItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      if (img && lightboxImage && lightbox) {
+        lightboxImage.src = img.src;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+      }
+    });
+  });
+
+  if (lightbox && lightboxClose) {
+    const closeLightbox = () => {
+      lightbox.classList.remove('flex');
+      lightbox.classList.add('hidden');
+    };
+
+    lightbox.addEventListener('click', closeLightbox);
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+</script>

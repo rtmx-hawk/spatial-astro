@@ -1,6 +1,15 @@
 
 import { Project, TeamMember, NavItem, Page } from './types';
 
+import keoweeSanctuaryImage from './assets/spacejoy-9M66C_w_ToM-unsplash.jpg';
+import highlandsCliffsideImage from './assets/jason-wang-5MG8cQbw-T8-unsplash.jpg';
+import ashevilleModernImage from './assets/jason-wang-NxAwryAbtIw-unsplash.jpg';
+import oconeeWatersImage from './assets/inside-weather-Uxqlfigh6oE-unsplash.jpg';
+import blueRidgeEstateImage from './assets/spacejoy-h2_3dL9yLpU-unsplash.jpg';
+import tocasCreekImage from './assets/kam-idris-_HqHX3LBN18-unsplash.jpg';
+import elenaPortrait from './assets/lisa-anna-3g4dEs9pZh4-unsplash.jpg';
+import julianPortrait from './assets/minh-pham-OtXADkUh3-I-unsplash.jpg';
+
 export const COLORS = {
   earthyGreen: '#777c62',
   softCream: '#f0ece2',
@@ -22,7 +31,7 @@ export const PROJECTS: Project[] = [
     id: 1,
     title: "Keowee Sanctuary",
     location: "Lake Keowee, SC",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop",
+    image: keoweeSanctuaryImage,
     description: "A modern sanctuary blending slate stone with warm oak interiors and panoramic water views.",
     category: "Lake"
   },
@@ -30,7 +39,7 @@ export const PROJECTS: Project[] = [
     id: 2,
     title: "Highlands Cliffside",
     location: "Highlands, NC",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop",
+    image: highlandsCliffsideImage,
     description: "Mountain texture meets minimalist luxury in this estate perched above the canopy.",
     category: "Mountain"
   },
@@ -38,7 +47,7 @@ export const PROJECTS: Project[] = [
     id: 3,
     title: "Asheville Modern",
     location: "Asheville, NC",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
+    image: ashevilleModernImage,
     description: "Floor-to-ceiling glass framing the Blue Ridge Mountains with bespoke leather furnishings.",
     category: "Mountain"
   },
@@ -46,7 +55,7 @@ export const PROJECTS: Project[] = [
     id: 4,
     title: "Oconee Waters",
     location: "Lake Oconee, GA",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2670&auto=format&fit=crop",
+    image: oconeeWatersImage,
     description: "Expansive outdoor living spaces designed for sunset views and lakeside leisure.",
     category: "Lake"
   },
@@ -54,7 +63,7 @@ export const PROJECTS: Project[] = [
     id: 5,
     title: "Blue Ridge Estate",
     location: "Blue Ridge, GA",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2670&auto=format&fit=crop",
+    image: blueRidgeEstateImage,
     description: "Timeless stone grandeur with contemporary interior finishes and woven textures.",
     category: "Estate"
   },
@@ -62,7 +71,7 @@ export const PROJECTS: Project[] = [
     id: 6,
     title: "Tocas Creek",
     location: "Upstate SC",
-    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2187&auto=format&fit=crop",
+    image: tocasCreekImage,
     description: "A renovation focusing on natural light and organic material palettes.",
     category: "Estate"
   }
@@ -73,12 +82,12 @@ export const TEAM: TeamMember[] = [
     name: "Elena Vance",
     role: "Principal Architect",
     bio: "Bringing 20 years of European design sensibility to the Blue Ridge Mountains.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1288&auto=format&fit=crop"
+    image: elenaPortrait
   },
   {
     name: "Julian Thorne",
     role: "Lead Interior Designer",
     bio: "Specializing in textile sourcing and bespoke furniture design.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop"
+    image: julianPortrait
   }
 ];

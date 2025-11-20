@@ -1,0 +1,125 @@
+---
+import { NAV_ITEMS } from '../data/constants';
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out border-b bg-transparent py-8 border-transparent"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="/" class="group">
+      <h1 class="nav-logo font-serif text-2xl md:text-3xl tracking-widest uppercase font-bold transition-colors duration-300 text-soft-cream mix-blend-difference">
+        Spatial
+      </h1>
+      <div class="h-[1px] bg-golden-tan transition-all duration-500 w-0 group-hover:w-full mt-1"></div>
+    </a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-12">
+      {NAV_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class={`nav-link text-sm tracking-[0.2em] uppercase font-medium transition-colors duration-300 hover:text-golden-tan relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-[-4px] after:left-0 after:bg-golden-tan after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+            currentPath === item.href
+              ? 'text-golden-tan after:scale-x-100'
+              : 'text-soft-cream mix-blend-difference'
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile Menu Icon -->
+    <div class="md:hidden">
+      <button class="nav-mobile-icon text-soft-cream text-2xl">
+        ☰
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const navLogo = document.querySelector('.nav-logo');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navMobileIcon = document.querySelector('.nav-mobile-icon');
+  const isHomePage = window.location.pathname === '/';
+
+  function handleScroll() {
+    const scrolled = window.scrollY > 50;
+
+    if (navbar) {
+      if (scrolled) {
+        navbar.classList.remove('bg-transparent', 'py-8', 'border-transparent');
+        navbar.classList.add('bg-soft-cream/90', 'backdrop-blur-md', 'py-4', 'border-cool-grey/50');
+      } else {
+        navbar.classList.remove('bg-soft-cream/90', 'backdrop-blur-md', 'py-4', 'border-cool-grey/50');
+        navbar.classList.add('bg-transparent', 'py-8', 'border-transparent');
+      }
+    }
+
+    // Update colors based on scroll and page
+    const shouldBeLight = !isHomePage || scrolled;
+
+    if (navLogo) {
+      if (shouldBeLight) {
+        navLogo.classList.remove('text-soft-cream', 'mix-blend-difference');
+        navLogo.classList.add('text-earthy-green');
+      } else {
+        navLogo.classList.remove('text-earthy-green');
+        navLogo.classList.add('text-soft-cream', 'mix-blend-difference');
+      }
+    }
+
+    navLinks.forEach(link => {
+      if (!link.classList.contains('text-golden-tan')) {
+        if (shouldBeLight) {
+          link.classList.remove('text-soft-cream', 'mix-blend-difference');
+          link.classList.add('text-earthy-green');
+        } else {
+          link.classList.remove('text-earthy-green');
+          link.classList.add('text-soft-cream', 'mix-blend-difference');
+        }
+      }
+    });
+
+    if (navMobileIcon) {
+      if (shouldBeLight) {
+        navMobileIcon.classList.remove('text-soft-cream');
+        navMobileIcon.classList.add('text-earthy-green');
+      } else {
+        navMobileIcon.classList.remove('text-earthy-green');
+        navMobileIcon.classList.add('text-soft-cream');
+      }
+    }
+  }
+
+  // Only add scroll listener on home page
+  if (isHomePage) {
+    window.addEventListener('scroll', handleScroll);
+  } else {
+    // On non-home pages, immediately apply the scrolled state
+    if (navbar) {
+      navbar.classList.remove('bg-transparent', 'py-8', 'border-transparent');
+      navbar.classList.add('bg-soft-cream/90', 'backdrop-blur-md', 'py-4', 'border-cool-grey/50');
+    }
+    if (navLogo) {
+      navLogo.classList.remove('text-soft-cream', 'mix-blend-difference');
+      navLogo.classList.add('text-earthy-green');
+    }
+    navLinks.forEach(link => {
+      if (!link.classList.contains('text-golden-tan')) {
+        link.classList.remove('text-soft-cream', 'mix-blend-difference');
+        link.classList.add('text-earthy-green');
+      }
+    });
+    if (navMobileIcon) {
+      navMobileIcon.classList.remove('text-soft-cream');
+      navMobileIcon.classList.add('text-earthy-green');
+    }
+  }
+</script>

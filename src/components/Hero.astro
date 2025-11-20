@@ -1,0 +1,122 @@
+---
+import { HERO_IMAGES } from '../data/constants';
+---
+
+<div class="relative w-full h-screen overflow-hidden bg-[#1a1a1a]">
+  <div class="absolute inset-0">
+    {HERO_IMAGES.map((image, index) => (
+      <div
+        class={`hero-image absolute inset-0 transition-opacity duration-[2000ms] ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+        data-index={index}
+      >
+        <div class="w-full h-full animate-hero-ken-burns will-change-transform">
+          <img
+            src={image}
+            alt="Spatial interior vignette"
+            class="w-full h-full object-cover"
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-soft-cream/10 mix-blend-overlay pointer-events-none" />
+  <div class="absolute inset-0 bg-black/30 pointer-events-none" />
+
+  <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10">
+    <h2
+      class="text-soft-cream text-xs md:text-sm tracking-[0.4em] uppercase mb-8 animate-slide-down opacity-0"
+      style="animation-delay: 0.5s; animation-fill-mode: forwards;"
+    >
+      Upstate SC • Western NC • Atlanta
+    </h2>
+
+    <h1
+      class="font-serif text-5xl md:text-7xl lg:text-8xl text-soft-cream font-light mb-10 tracking-wide leading-tight animate-fade-up opacity-0"
+      style="animation-delay: 0.8s; animation-fill-mode: forwards;"
+    >
+      Living in <br />
+      <span class="italic font-normal text-warm-sand">Resonance</span>
+    </h1>
+
+    <div
+      class="flex flex-col md:flex-row gap-6 mt-4 animate-fade-up opacity-0"
+      style="animation-delay: 1.2s; animation-fill-mode: forwards;"
+    >
+      <a
+        href="/gallery"
+        class="group relative px-10 py-4 overflow-hidden border border-soft-cream/30 backdrop-blur-sm text-soft-cream hover:text-earthy-green transition-all duration-500 tracking-widest uppercase text-xs"
+      >
+        <span class="relative z-10">View Portfolio</span>
+        <div class="absolute inset-0 h-full w-full bg-soft-cream transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ease-out"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-soft-cream/70 animate-bounce duration-[2000ms]">
+    <span class="text-[9px] tracking-[0.3em] uppercase mb-4">Explore</span>
+    <div class="w-[1px] h-12 bg-gradient-to-b from-soft-cream to-transparent"></div>
+  </div> -->
+</div>
+
+<style>
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-down {
+    animation: slide-down 1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .animate-hero-ken-burns {
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+</style>
+
+<script>
+  const images = document.querySelectorAll('.hero-image');
+  let activeIndex = 0;
+
+  function cycleImages() {
+    // Hide current image
+    images[activeIndex].classList.remove('opacity-100');
+    images[activeIndex].classList.add('opacity-0');
+
+    // Move to next image
+    activeIndex = (activeIndex + 1) % images.length;
+
+    // Show next image
+    images[activeIndex].classList.remove('opacity-0');
+    images[activeIndex].classList.add('opacity-100');
+  }
+
+  // Start cycling every 12 seconds
+  setInterval(cycleImages, 12000);
+</script>
